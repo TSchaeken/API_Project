@@ -1,0 +1,28 @@
+.carousel-item.active img  {
+    margin: auto;
+}
+
+#carouselExampleIndicators > div > div:nth-child(1) > div > h1 {
+    color: black;
+}
+
+#carouselExampleIndicators > div > div:nth-child(1) > div > h3 {
+    color: black;
+}
+
+#carouselExampleIndicators > div > div:nth-child(2) > div > h1 {
+    color: black;
+}
+
+#carouselExampleIndicators > div > div:nth-child(2) > div > h3 {
+    color: black;
+}
+
+#carouselExampleIndicators > div > div:nth-child(3) > div > h1 {
+    color: black;
+}
+
+#carouselExampleIndicators > div > div:nth-child(3) > div > h3 {
+    color: black;
+}
+
