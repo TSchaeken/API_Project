@@ -14,12 +14,14 @@
 
 
 
-  <title>SickSearch Home Page</title>
+  <title>SickSearch&reg; Home Page</title>
 </head>
 
 <body>
+
+  <!-- NAVBAR START -->
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border">
       <a class="navbar-brand" href="#">
 
         <img src="assets/img/logo.png" height=50 width=100>
@@ -33,12 +35,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="index.html">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -57,9 +59,9 @@
               <a class="dropdown-item" href="dallas.html">Dallas, TX</a>
               <a class="dropdown-item" href="sanjose.html">San Jose, CA</a>
             </div>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -68,9 +70,11 @@
       </div>
     </nav>
   </div>
+  <!-- NAVBAR END -->
 
-  <div class="container">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
+  <!-- CAROUSEL START -->
+  <div class="container" style="height: 460px;">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img class="d-block img-fluid" style="width: 30%;" src="assets/img/heart.jpg" max-width=100% height=auto alt="First slide">
@@ -104,6 +108,92 @@
       </a>
     </div>
   </div>
+  <!-- CAROUSEL END -->
+
+  <!-- FOOTER START -->
+  <div class="container">
+    <footer class="page-footer font-small stylish-color-dark pt-4 mt-4 bg-secondary text-white">
+      <div class="container text-center text-md-left">
+        <div class="row text-center text-md-left mt-3 pb-3">
+
+          <!--First column-->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">SickSearch&reg;</h6>
+
+          </div>
+          <!--/.First column-->
+
+          <hr class="w-100 clearfix d-md-none">
+
+          <!--Second column-->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+            <p>
+              <a href="#!" class="text-warning">MDBootstrap</a>
+            </p>
+            <p>
+              <a href="#!" class="text-warning">MDWordPress</a>
+            </p>
+            <p>
+              <a href="#!" class="text-warning">BrandFlow</a>
+            </p>
+            <p>
+              <a href="#!" class="text-warning">Bootstrap Angular</a>
+            </p>
+          </div>
+          <!--/.Second column-->
+
+          <!--Third column-->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+            <p>
+              <a href="#!" class="text-warning">Your Account</a>
+            </p>
+            <p>
+              <a href="#!" class="text-warning">Become an Affiliate</a>
+            </p>
+            <p>
+              <a href="#!" class="text-warning">Shipping Rates</a>
+            </p>
+            <p>
+              <a href="#!" class="text-warning">Help</a>
+            </p>
+          </div>
+          <!--/.Third column-->
+
+          <hr class="w-100 clearfix d-md-none">
+
+          <!--Fourth column-->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p>
+              <i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p>
+              <i class="fa fa-envelope mr-3"></i> info@gmail.com</p>
+            <p>
+              <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+            <p>
+              <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+          <!--/.Fourth column-->
+
+        </div>
+        <!-- Footer links -->
+
+        <hr>
+
+        <div class="row py-3 d-flex align-items-center">
+
+          <!--Grid column-->
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+  <!-- FOOTER END -->
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
