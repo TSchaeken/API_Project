@@ -13,54 +13,60 @@ var client = new Twitter({
   access_token_secret: "3wqwYIh68R1FtOebUEjr7RcoKQNnmY4L2FYDiXGLqYG1E"
 });
 
-var store = [];
 var maxId = 0;
 
-var sick = {
+var Phoenix = {
+  name: "Phoenix",
   sickCount: 0,
   totalCount: 0,
-  arr: [""]
+  arr: [],
+  geo: ""
 };
+
+var Scottsdale = {
+  name: "Scottsdale",
+  sickCount: 0,
+  totalCount: 0,
+  arr: [],
+  geo: ""
+};
+
+
 
 app.use(cors());
 
 app.get("/app/:geo/", function(req, res) {
-  res.send(sick);
+  var resArr = [Phoenix, Scottsdale]
+  res.send(resArr);
 });
 
-// function sickSearch() {
-//   store.forEach(function(element) {
-//     if (element.indexOf("sick") > -1) {
-//       sick.totalCount++;
-//       sick.sickCount++;
-//       sick.arr.push(element);
-//     }
-//   });
-// }
 
-function Tweeter(geo, i) {
-  if (i === 100) {
-    console.log(sick);
+function Tweeter(geo, i, object) {
+  var currObj = object;
+  currObj.geo = geo;
+  if (i === 10) {
+    console.log(currObj);
     return 0;
   } else {
     client.get(
       "search/tweets",
       {
-        geocode: geo,
+        geocode: geo + ",5mi",
         count: 100,
         max_id: maxId
       },
       function(error, tweets, response) {
+
         var tweet = tweets.statuses;
 
         for (var j = 0; j < tweet.length; j++) {
           if (tweet[j].text.indexOf("sick") > -1) {
-            sick.sickCount++;
-            sick.totalCount++;
-            sick.arr.push(tweet[j].text);
+            currObj.sickCount++;
+            currObj.totalCount++;
+            currObj.arr.push(tweet[j].text);
           }
           else {
-              sick.totalCount++;
+            currObj.totalCount++;
           }
         }
 
@@ -68,7 +74,7 @@ function Tweeter(geo, i) {
 
         maxId = next_id;
 
-        Tweeter(geo, i + 1);
+        Tweeter(geo, i + 1, currObj);
       }
     );
   }
@@ -79,10 +85,11 @@ function setMax() {
     "search/tweets",
     {
       q: "hey",
-      count: 1
+      count: 2
     },
     function(error, tweets, response) {
       var tweet = tweets.statuses;
+    
 
       var next_id = tweet[tweet.length - 1].id_str;
 
@@ -92,26 +99,11 @@ function setMax() {
 }
 
 setMax();
-Tweeter("33.4483800,-112.07404010,20mi", 0);
+
+Tweeter("33.4483800,-112.07404010", 0, Phoenix);
+
+Tweeter("33.501324,-111.925278", 0, Scottsdale);
 
 app.listen(PORT, () => {
   console.log(`app listening on port ${PORT}`);
 });
-
-// function Tweeter ( n ) {
-//     console.log( "Entering recursive function for [", n, "]." );
-//     // Once we hit zero, bail out of the recursion. The key to recursion is that
-//     // it stops at some point, and the callstack can be "rolled" back up.
-//     if ( n === 0 ) {
-//         return( 0 );
-//     }
-//     // Start a NEW PROMISE CHAIN that will become the continuation of the parent
-//     // promise chain. This new promise chain now becomes a completely tangential
-//     // branch to the parent promise chain.
-//     var tangentialPromiseBranch = Promise.resolve().then(
-//         function() {
-//             return( Tweeter( n - 1 ) ); // RECURSE!
-//         }
-//     );
-//     return( tangentialPromiseBranch );
-// }
