@@ -4,10 +4,13 @@ $(document).ready(function() {
     method: "GET"
   }).then(function(response) {
 
-    var data = response
-    console.log(data)
+    var data = response;
 
-    var mymap = L.map("mapid").setView([33.44838, -112.0740401], 10);
+    var mymap = L.map("mapDiv",{
+      center: [33.44838, -112.0740401],
+      zoom: 10
+    })
+
     L.tileLayer(
       "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
       {
@@ -19,22 +22,16 @@ $(document).ready(function() {
           "pk.eyJ1IjoidHNjaGFla2VuIiwiYSI6ImNqZnUwOXA5eDBpYjYyd252eG1iczNmdnIifQ.3fUaJSyXZnRt9UCDNrYjcg"
       }
     ).addTo(mymap);
-      
-      // var latlng = L.latLng(geo1);
-      // var circleMarker = L.circle([latlng], {
-      //   color: "red",
-      //   fillColor: "#f03",
-      //   fillOpacity: 0.5,
-      //   radius: 50
-      // }).addTo(mymap);
 
-      for (var i=0;i<data.length;i++)
-{
-    var data=data[i];
-    console.log(data)
-    var m = L.marker(new L.LatLng(data.geo)).addTo(mymap);
-}
+    for (var i = 0; i < data.length; i++){
+    var cord = [data[i].lon, data[i].lat];
+    var zone = L.circle(cord,{
+      color: 'red',
+      fillColor:'red',
+      opacity: 0.25,
+      radius:8000
+    }).addTo(mymap);
+  };
 
-
-  });
 });
+})
