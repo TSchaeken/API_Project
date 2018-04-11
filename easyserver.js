@@ -33,12 +33,21 @@ var Scottsdale = {
   lat: ""
 };
 
+var Mesa = {
+  name: "Mesa",
+  sickCount: 0,
+  totalCount: 0,
+  arr: [],
+  lon: "",
+  lat: ""
+};
+
 
 
 app.use(cors());
 
 app.get("/app/:geo/", function(req, res) {
-  var resArr = [Phoenix, Scottsdale]
+  var resArr = [Phoenix, Scottsdale, Mesa]
   res.send(resArr);
 });
 
@@ -47,23 +56,20 @@ function Tweeter(lon, lat, i, object) {
   var currObj = object;
   currObj.lon = lon;
   currObj.lat = lat;
-  if (i === 10) {
+  if (i === 20) {
     console.log(currObj);
-    return 0;
+    return;
   } else {
     client.get(
       "search/tweets",
       {
         geocode: lon + ","+ lat + ",5mi",
-        count: 10,
+        count: 100,
         max_id: maxId
       },
       function(error, tweets, response) {
-
         var tweet = tweets.statuses;
-
         if (tweet.length != undefined){
-
             for (var j = 0; j < tweet.length; j++) {
               if (tweet[j].text.indexOf("sick") > -1) {
                 currObj.sickCount++;
@@ -95,7 +101,7 @@ function setMax() {
     "search/tweets",
     {
       q: "hey",
-      count: 1
+      count: 2
     },
     function(error, tweets, response) {
 
@@ -113,6 +119,8 @@ setMax();
 Tweeter("33.4483800","-112.07404010", 0, Phoenix);
 
 Tweeter("33.501324","-111.925278", 0, Scottsdale);
+
+Tweeter("33.424564", "-111.833267", 0, Mesa);
 
 app.listen(PORT, () => {
   console.log(`app listening on port ${PORT}`);
