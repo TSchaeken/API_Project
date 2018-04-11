@@ -2,6 +2,8 @@
     margin: auto;
 }
 
+#mapid { height: 600px; }
+
 #carouselExampleIndicators > div > div:nth-child(1) > div > h1 {
     color: black;
 }
