@@ -20,7 +20,8 @@ var Phoenix = {
   sickCount: 0,
   totalCount: 0,
   arr: [],
-  geo: ""
+  lon: "",
+  lat: ""
 };
 
 var Scottsdale = {
@@ -28,7 +29,8 @@ var Scottsdale = {
   sickCount: 0,
   totalCount: 0,
   arr: [],
-  geo: ""
+  lon: "",
+  lat: ""
 };
 
 
@@ -41,9 +43,10 @@ app.get("/app/:geo/", function(req, res) {
 });
 
 
-function Tweeter(geo, i, object) {
+function Tweeter(lon, lat, i, object) {
   var currObj = object;
-  currObj.geo = geo;
+  currObj.lon = lon;
+  currObj.lat = lat;
   if (i === 10) {
     console.log(currObj);
     return 0;
@@ -51,30 +54,37 @@ function Tweeter(geo, i, object) {
     client.get(
       "search/tweets",
       {
-        geocode: geo + ",5mi",
-        count: 100,
+        geocode: lon + ","+ lat + ",5mi",
+        count: 10,
         max_id: maxId
       },
       function(error, tweets, response) {
 
         var tweet = tweets.statuses;
 
-        for (var j = 0; j < tweet.length; j++) {
-          if (tweet[j].text.indexOf("sick") > -1) {
-            currObj.sickCount++;
-            currObj.totalCount++;
-            currObj.arr.push(tweet[j].text);
+        if (tweet.length != undefined){
+
+            for (var j = 0; j < tweet.length; j++) {
+              if (tweet[j].text.indexOf("sick") > -1) {
+                currObj.sickCount++;
+                currObj.totalCount++;
+                currObj.arr.push(tweet[j].text);
+              }
+              else {
+                currObj.totalCount++;
+              }
+            }
           }
-          else {
-            currObj.totalCount++;
-          }
-        }
+
+      else{
+        return
+      }
 
         var next_id = tweet[tweet.length - 1].id_str;
 
         maxId = next_id;
 
-        Tweeter(geo, i + 1, currObj);
+        Tweeter(lon, lat, i + 1, currObj);
       }
     );
   }
@@ -85,11 +95,11 @@ function setMax() {
     "search/tweets",
     {
       q: "hey",
-      count: 2
+      count: 1
     },
     function(error, tweets, response) {
+
       var tweet = tweets.statuses;
-    
 
       var next_id = tweet[tweet.length - 1].id_str;
 
@@ -100,9 +110,9 @@ function setMax() {
 
 setMax();
 
-Tweeter("33.4483800,-112.07404010", 0, Phoenix);
+Tweeter("33.4483800","-112.07404010", 0, Phoenix);
 
-Tweeter("33.501324,-111.925278", 0, Scottsdale);
+Tweeter("33.501324","-111.925278", 0, Scottsdale);
 
 app.listen(PORT, () => {
   console.log(`app listening on port ${PORT}`);
