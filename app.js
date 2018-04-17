@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url: "http://localhost:8080/app/33.4483800,-112.07404010,20mi/",
+    url: "http://localhost:8080/",
     method: "GET"
   }).then(function(response) {
 
