@@ -1,3 +1,11 @@
+/*
+app.js responds to a specific page load, in this case Phoenix.html, and loads both the Leaflet API map, the tile layer for it, as well as several 5 mi radius circles representing
+locations where "sick" was tweeted from.
+
+Currently it draws a circle on the response GPS coordinates, but in the future it will be developed to act dynamically to a much larger collection of twitter data, parsed and passed back
+as the user zooms in and out of a location.
+*/
+
 $(document).ready(function() {
   $.ajax({
     url: "http://localhost:8080/",
