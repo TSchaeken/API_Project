@@ -33,6 +33,16 @@ var Scottsdale = {
   lat: ""
 };
 
+
+var Glendale = {
+  name: "Glendale",
+  sickCount: 0,
+  totalCount: 0,
+  arr: [],
+  lon: "",
+  lat: ""
+};
+
 var Mesa = {
   name: "Mesa",
   sickCount: 0,
@@ -46,8 +56,9 @@ var Mesa = {
 
 app.use(cors());
 
-app.get("/app/:geo/", function(req, res) {
-  var resArr = [Phoenix, Scottsdale, Mesa]
+app.get("/", function(req, res) {
+  var resArr = [Phoenix, Scottsdale, Mesa, Glendale]
+
   res.send(resArr);
 });
 
@@ -83,6 +94,7 @@ function Tweeter(lon, lat, i, object) {
           }
 
       else{
+        console.log('breaking')
         return
       }
 
@@ -113,15 +125,21 @@ function setMax() {
     }
   );
 }
-
+function startServer(){
 setMax();
 
 Tweeter("33.4483800","-112.07404010", 0, Phoenix);
 
 Tweeter("33.501324","-111.925278", 0, Scottsdale);
 
-Tweeter("33.424564", "-111.833267", 0, Mesa);
+Tweeter("33.4483800","-112.07404010", 0, Glendale);
+
+Tweeter("33.501324","-111.925278", 0, Mesa);
+
+}
 
 app.listen(PORT, () => {
   console.log(`app listening on port ${PORT}`);
 });
+
+startServer();
