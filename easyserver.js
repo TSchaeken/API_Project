@@ -45,6 +45,7 @@ var Scottsdale = {
   lat: ""
 };
 
+
 var Glendale = {
   name: "Glendale",
   sickCount: 0,
@@ -72,6 +73,7 @@ app.use(cors());
 
 app.get("/", function(req, res) {
   var resArr = [Phoenix, Scottsdale, Mesa, Glendale]
+
   res.send(resArr);
 });
 
@@ -81,6 +83,7 @@ function Tweeter(lon, lat, i, object) {
   var currObj = object;
   currObj.lon = lon;
   currObj.lat = lat;
+<<<<<<< HEAD
 
 //I will break the Tweeter into large related chunks. 
 //The above instantiates the tweeter function on the object paramaterized by the "Object" parameter. In the future, this would be a constructor-esque model, but we wanted to have something to show, so hard coded again.
@@ -94,19 +97,25 @@ function Tweeter(lon, lat, i, object) {
 
 
   else {
+=======
+  if (i === 20) {
+    console.log(currObj);
+    return;
+  } else {
+>>>>>>> b46124b98950072d115e6cb04b9ba2451efa9a29
     client.get(
       "search/tweets",
       {
         geocode: lon + ","+ lat + ",5mi",
-        count: 10,
+        count: 100,
         max_id: maxId
       },
 
       //Set "GET" parameters for Twitter API
 
       function(error, tweets, response) {
-
         var tweet = tweets.statuses;
+<<<<<<< HEAD
 
         //reduce length of referenced code
 
@@ -114,6 +123,9 @@ function Tweeter(lon, lat, i, object) {
 
           //checks the tweet objects length, will return undefined if paginated to result end.
 
+=======
+        if (tweet.length != undefined){
+>>>>>>> b46124b98950072d115e6cb04b9ba2451efa9a29
             for (var j = 0; j < tweet.length; j++) {
               if (tweet[j].text.indexOf("sick") > -1) {
                 currObj.sickCount++;
@@ -152,7 +164,7 @@ function setMax() {
     "search/tweets",
     {
       q: "hey",
-      count: 1
+      count: 2
     },
     function(error, tweets, response) {
 
